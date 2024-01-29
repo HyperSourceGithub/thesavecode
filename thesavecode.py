@@ -26,93 +26,82 @@ def load(seconds):
 		time.sleep(0.1)
 
 load(5)
+os.system('clear')
+mode = input("Enter mode (read/write): ").lower()
 
-while True:
+if mode == "write":
+	upto = input("Enter a number to count up to (max 4 digits): ")
+	maxcount = upto[0:4]
+	print(" ")
+	while (count < int(maxcount)):
+		print ("\033[A\033[A")
+		count += 1
+		print(f"Count: {count}")
+		time.sleep(0.001)
+
+
+	food = input("Enter yes/no: ").lower()
+	if food == "yes":
+		hamburger = "yes"
+	elif food == "no":
+		hamburger == "-no"
+	else: 
+		print("Error: invalid answer, defaulting to yes")
+		hamburger = "yes"
+
+	load = input("Enter magazine bullet count for pistol (max 4 digits): ")
+	maxbullets = load[0:4]
+	print(" ")
+	while (bullets < int(maxbullets)):
+		print ("\033[A\033[A")
+		bullets += 1
+		print(f"Bullets: {bullets}")
+		time.sleep(0.001)
+
+	print("Generating save code...")
+	time.sleep(0.5)
+	print("Calculating stuff...")
+	clen = len(str(count))
+	if clen < 4 :
+		if clen == 1:
+			count = f"000{count}"
+		elif clen == 2:
+			count = f"00{count}"
+		elif clen == 3:
+			count = f"0{count}"
+	blen = len(str(bullets))
+	if blen < 4 :
+		if blen == 1:
+			bullets = f"000{bullets}"
+		elif blen == 2:
+			bullets = f"00{bullets}"
+		elif blen == 3:
+			bullets = f"0{bullets}"
+	
 	time.sleep(3)
-	os.system('clear')
-	mode = input("Enter mode (read/write): ").lower()
+	print("Writing variables...")
+	time.sleep(2)
+	print("Done!")
+	time.sleep(1.5)
+	savecode = f"{count}{hamburger}{bullets}{generate_randoms(random.randint(0,5000))}"
+	print(f"Save code: {savecode}")
 
-	if mode == "write":
-		upto = input("Enter a number to count up to (max 4 digits): ")
-		maxcount = upto[0:4]
-		print(" ")
-		while (count < int(maxcount)):
-			print ("\033[A\033[A")
-			count += 1
-			print(f"Count: {count}")
-			time.sleep(0.001)
-
-
-		food = input("Enter yes/no: ").lower()
-		if food == "yes":
-			hamburger = "yes"
-		elif food == "no":
-			hamburger == "-no"
-		else: 
-			print("Error: invalid answer, defaulting to yes")
-
-		load = input("Enter magazine bullet count for pistol (max 4 digits): ")
-		maxbullets = load[0:4]
-		print(" ")
-		while (bullets < int(maxbullets)):
-			print ("\033[A\033[A")
-			bullets += 1
-			print(f"Bullets: {bullets}")
-			time.sleep(0.001)
-
-		print("Generating save code...")
-		time.sleep(0.5)
-		print("Calculating stuff...")
-		clen = len(str(count))
-		if clen < 4 :
-			if clen == 1:
-				count = f"000{count}"
-			elif clen == 2:
-				count = f"00{count}"
-			elif clen == 3:
-				count = f"0{count}"
-		blen = len(str(bullets))
-		if blen < 4 :
-			if blen == 1:
-				bullets = f"000{bullets}"
-			elif blen == 2:
-				bullets = f"00{bullets}"
-			elif blen == 3:
-				bullets = f"0{bullets}"
-		
-		time.sleep(3)
-		print("Writing variables...")
-		time.sleep(2)
-		print("Done!")
-		time.sleep(1.5)
-		savecode = f"{count}{hamburger}{bullets}{generate_randoms(random.randint(0,5000))}"
-		print(f"Save code: {savecode}")
-		time.sleep(0.5)
-		print("Please copy your save code.")
-		print("")
-		for i in range(10):
-			print ("\033[A\033[A")
-			print(f"Restarting in {10-i}...")
-			time.sleep(1)
-
-	elif mode == "read":
-		savecode = input("Enter save code: ")
-		count = savecode[0:4].strip("0")
-		hamburger = savecode[4:7]
-		bullets = savecode[7:11].strip("0")
-		if hamburger == "yes":
-			print(f'''
+elif mode == "read":
+	savecode = input("Enter save code: ")
+	count = savecode[0:4].strip("0")
+	hamburger = savecode[4:7]
+	bullets = savecode[7:11].strip("0")
+	if hamburger == "yes":
+		print(f'''
 Count: {count}
 Hamburger: Yes
 Bullets: {bullets}
-''')
-		elif hamburger == "-no":
-			print(f'''
+	''')
+	elif hamburger == "-no":
+		print(f'''
 Count: {count}
 Hamburger: No
 Bullets: {bullets}
 ''')
-	else:
-		print("Invalid mode. Restarting...")
-	
-
+else:
+	print("Invalid mode. Please restart the program.")
