@@ -1,5 +1,6 @@
 import random
 import time
+import os
 
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
@@ -12,6 +13,7 @@ def generate_randoms(counter):
   rand = f"{random.randint(0,counter)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters).upper()}{random.choice(letters).upper()}{random.choice(letters).upper()}"
   return rand
 
+os.system('clear')
 mode = input("Enter mode (read/write): ").lower()
 
 if mode == "write":
