@@ -9,8 +9,7 @@ hamburger = None
 bullets = 0
 
 def generate_randoms(counter):
-  for x in range(counter):
-    rand = f"{random.randint(0,counter)}{x}{random.choice(letters)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters).upper()}{random.choice(letters).upper()}{random.choice(letters).upper()}{random.choice(letters).upper()}"
+  rand = f"{random.randint(0,counter)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters).upper()}{random.choice(letters).upper()}{random.choice(letters).upper()}"
   return rand
 
 mode = input("Enter mode (read/write): ").lower()
@@ -23,6 +22,7 @@ if mode == "write":
     print ("\033[A\033[A")
     count += 1
     print(f"Count: {count}")
+    time.sleep(0.001)
 
 
   food = input("Enter yes/no: ").lower()
@@ -40,16 +40,41 @@ if mode == "write":
     print ("\033[A\033[A")
     bullets += 1
     print(f"Bullets: {bullets}")
+    time.sleep(0.001)
 
   print("Generating save code...")
-  savecode = f"{count}{hamburger}{bullets}{generate_randoms(random.randint(0,50000))}"
+  time.sleep(0.5)
+  print("Calculating stuff...")
+  clen = len(str(count))
+  if clen < 4 :
+    if clen == 1:
+      count = f"000{count}"
+    elif clen == 2:
+      count = f"00{count}"
+    elif clen == 3:
+      count = f"0{count}"
+  blen = len(str(bullets))
+  if blen < 4 :
+    if blen == 1:
+      bullets = f"000{bullets}"
+    elif blen == 2:
+      bullets = f"00{bullets}"
+    elif blen == 3:
+      bullets = f"0{bullets}"
+  
+  time.sleep(3)
+  print("Writing variables...")
+  time.sleep(2)
+  print("Done!")
+  time.sleep(1.5)
+  savecode = f"{count}{hamburger}{bullets}{generate_randoms(random.randint(0,5000))}"
   print(f"Save code: {savecode}")
 
 elif mode == "read":
   savecode = input("Enter save code: ")
-  count = savecode[0:4]
+  count = savecode[0:4].strip("0")
   hamburger = savecode[4:7]
-  bullets = savecode[7:11]
+  bullets = savecode[7:11].strip("0")
   if hamburger == "yes":
     print(f'''
 Count: {count}
