@@ -47,21 +47,21 @@ if mode == "write":
 
 elif mode == "read":
   savecode = input("Enter save code: ")
-  count = savecode[1:4]
-  hamburger = savecode[5:7]
-  bullets = savecode[8:11]
+  count = savecode[0:4]
+  hamburger = savecode[4:7]
+  bullets = savecode[7:11]
   if hamburger == "yes":
-      print(f'''
-  Count: {count}
-  Hamburger: Yes
-  Bullets: {bullets}
-  ''')
+    print(f'''
+Count: {count}
+Hamburger: Yes
+Bullets: {bullets}
+''')
   elif hamburger == "-no":
-      print(f'''
-  Count: {count}
-  Hamburger: No
-  Bullets: {bullets}
-  ''')
+    print(f'''
+Count: {count}
+Hamburger: No
+Bullets: {bullets}
+''')
 else:
   print("Invalid mode. Please restart the program.")
 
